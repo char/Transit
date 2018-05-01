@@ -13,6 +13,7 @@ group "site.hackery"
 version "1.0.0"
 
 apply plugin: "kotlin"
+apply plugin: "maven-publish"
 
 repositories {
     mavenCentral()
@@ -29,4 +30,17 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url uri("build/maven/")
+        }
+    }
 }
